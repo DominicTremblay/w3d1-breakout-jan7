@@ -1,0 +1,1 @@
+<h1>Partials</h1>
