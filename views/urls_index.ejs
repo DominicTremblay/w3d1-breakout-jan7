@@ -12,6 +12,8 @@
   <h1>List of URLs</h1>
 
   <%- include partials/_header.ejs %>
+
+  <% if (user) { %>
   <table border="1">
     <thead>
       <tr>
@@ -25,12 +27,20 @@
     <% for ( let shortUrl in urls ) { %>
       <tr>
         <td><%= shortUrl %></td>
-        <td><%= urls[shortUrl] %></td>
+        <td><%= urls[shortUrl].url %></td>
+        <% if ( user && user.id === urls[shortUrl].userID ) { %>
         <td><a href="/urls/<%= shortUrl %>">Edit</a></td>
         <td><form method="POST" action="/urls/<%= shortUrl %>/delete"><input type="submit" value="Delete"></form></td>
+        <% } %>
       </tr>  
     <% } %>
       </tbody>
     </table>
+    <% } else { %>
+      <h2>Please Login or Register</h2>
+
+      You must be logged in to view the list of URLs.
+
+    <% } %>
 </body>
 </html>
