@@ -30,7 +30,7 @@
         <td><%= urls[shortUrl].url %></td>
         <% if ( user && user.id === urls[shortUrl].userID ) { %>
         <td><a href="/urls/<%= shortUrl %>">Edit</a></td>
-        <td><form method="POST" action="/urls/<%= shortUrl %>/delete"><input type="submit" value="Delete"></form></td>
+        <td><form method="POST" action="/urls/<%= shortUrl %>?_method=DELETE"><input type="submit" value="Delete"></form></td>
         <% } %>
       </tr>  
     <% } %>

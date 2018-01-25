@@ -5,6 +5,7 @@ const bodyParser    = require("body-parser");
 // const cookieParser  = require('cookie-parser');
 const bcrypt        = require('bcrypt');
 const cookieSession = require('cookie-session');
+const methodOverride = require('method-override');
 
 app.use(bodyParser.urlencoded({extended: true}));
 // app.use(cookieParser());
@@ -16,6 +17,8 @@ app.use(cookieSession({
   // Cookie Options
   maxAge: 24 * 60 * 60 * 1000 // 24 hours
 }));
+
+app.use(methodOverride('_method'));
 
 app.set("view engine", "ejs");
 
@@ -176,11 +179,16 @@ app.get("/urls.json", (req, res) => {
   res.json(urlDatabase);
 });
 
-app.post("/urls/:id", (req, res) =>{
+app.put("/urls/:id", (req, res) =>{
+  console.log("PUT");
   const shortURL  = req.params.id;
   const longURL   = req.body.longURL;
 
-  urlDatabase[shortURL] = longURL;
+  console.log(shortURL, longURL);
+
+  urlDatabase[shortURL].url = longURL;
+
+  console.log(urlDatabase);
 
   res.redirect('/urls');
 
@@ -191,7 +199,7 @@ app.post('/logout', (req, res) => {
   res.status(302).redirect('/urls');
 });
 
-app.post("/urls/:id/delete", (req, res) => {
+app.delete("/urls/:id", (req, res) => {
   const shortURL = req.params.id;
   if ( urlDatabase[shortURL] ) {
     delete urlDatabase[shortURL];
