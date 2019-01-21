@@ -12,7 +12,6 @@
   
 
   <h2>Short URL: <%= shortURL %></h2>
-  <h3><%= views %> Views - <%= uniqueVisits %> Unique Visits </h3>
 
   <form action="/urls/<%= shortURL %>?_method=PUT" method="post">
     <input type="text" value="<%= longURL %>" name="longURL">
