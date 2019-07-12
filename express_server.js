@@ -107,7 +107,6 @@ function urlsForUser(id) {
     const urlObj = urlDatabase[shortUrl];
 
     if (urlObj.userId === id) {
-      
       // url belongs to that user
       // the urlObj needs to be part of the filterdUrls object
       filteredUrls[shortUrl] = urlObj;
@@ -263,7 +262,7 @@ app.put('/urls/:id', (req, res) => {
   const shortURL = req.params.id;
   const { longURL } = req.body;
 
-  urlDatabase[shortURL].url = longURL;
+  urlDatabase[shortURL].longUrl = longURL;
   res.redirect('/urls');
 });
 
